@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  IBM to AMQ Bridge
+  %%
+  Copyright (C) 2013 - 2017 Gareth Healy
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <!-- AMQ -->
+    <bean id="amq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="configuration" ref="jmsConfiguration"/>
+        <property name="concurrentConsumers" value="1"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+        <property name="connectionFactory" ref="jmsPooledConnectionFactory"/>
+    </bean>
+
+    <bean id="jmsPooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+          init-method="start" destroy-method="stop" primary="true">
+        <property name="maxConnections" value="1"/>
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
+    </bean>
+
+    <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://192.168.64.2:30535"/>
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
+    </bean>
+
+    <bean id="jmsConfiguration" class="org.apache.camel.component.jms.JmsConfiguration">
+        <property name="connectionFactory" ref="jmsPooledConnectionFactory"/>
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="transacted" value="true"/>
+        <property name="explicitQosEnabled" value="true"/>
+        <property name="jmsMessageType" value="Text"/>
+        <property name="cacheLevelName" value="CACHE_CONSUMER"/>
+    </bean>
+    <!-- ##AMQ -->
+
+    <!-- IBM -->
+    <bean id="ibmTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+        <property name="connectionFactory" ref="ibmMqQueueConnectionFactory"/>
+    </bean>
+
+    <bean id="ibmMqQueueConnectionFactory" class="com.ibm.mq.jms.MQConnectionFactory">
+        <property name="transportType" value="1"/>
+        <property name="hostName" value="192.168.64.2"/>
+        <property name="port" value="31126"/>
+        <property name="queueManager" value="QM1"/>
+        <property name="channel" value="DEV.APP.SVRCONN"/>
+        <property name="useConnectionPooling" value="true"/>
+    </bean>
+
+    <bean id="ibmJmsConfiguration" class="org.apache.camel.component.jms.JmsConfiguration">
+        <property name="connectionFactory" ref="ibmMqQueueConnectionFactory"/>
+        <property name="transactionManager" ref="ibmTransactionManager"/>
+        <property name="transacted" value="true"/>
+        <property name="explicitQosEnabled" value="true"/>
+        <property name="jmsMessageType" value="Text"/>
+    </bean>
+
+    <bean id="ibmmq" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="connectionFactory" ref="ibmMqQueueConnectionFactory"/>
+        <property name="configuration" ref="ibmJmsConfiguration"/>
+    </bean>
+    <!-- ##IBM -->
+
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+
+        <route id="timer-to-ibmq" autoStartup="false">
+            <from uri="timer:foo?period=2000"/>
+            <setBody>
+                <constant>hello test</constant>
+            </setBody>
+            <log message="${body} - IBMQ == DEV.QUEUE.1"/>
+            <to uri="ibmmq:DEV.QUEUE.1"/>
+        </route>
+
+        <route id="bridge-from-ibmmq-to-amq" autoStartup="false">
+            <from uri="ibmmq:DEV.QUEUE.1"/>
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <log message="${body} - 2 - Bridging from IBMQ to AMQ"/>
+            <to uri="amq:queue:DEV-QUEUE-1"/>
+        </route>
+
+        <route id="timer-to-amq">
+            <from uri="timer:foo?period=2000"/>
+            <setBody>
+                <constant>hello test</constant>
+            </setBody>
+            <log message="${body} - AMQ == DEV-QUEUE-1"/>
+            <to uri="amq:DEV-QUEUE-1"/>
+        </route>
+
+        <route id="bridge-from-amq-to-ibmmq" >
+            <from uri="amq:DEV-QUEUE-1"/>
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <log message="${body} - 1 - Bridging from AMQ to IBMQ"/>
+            <to uri="ibmmq:queue:DEV.QUEUE.1"/>
+        </route>
+
+    </camelContext>
+
+</beans>
