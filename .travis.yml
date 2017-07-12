@@ -1,5 +1,7 @@
 sudo: required
 dist: trusty
+services:
+- docker
 addons:
   sonarqube:
     organization: garethahealy-github
@@ -16,6 +18,7 @@ jdk:
 - oraclejdk8
 before_install:
 - bash .travis/deploy-codesigning.sh
+- bash .travis/install-mq-jars.sh
 install:
 - bash .travis/update.sh
 - export M2_HOME=/usr/share/maven3 && export PATH=${M2_HOME}/bin:${PATH} && export MAVEN_OPTS="-Xms2048m -Xmx2048m"
