@@ -28,6 +28,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(CamelSpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -41,5 +42,6 @@ public class CamelContextTest {
     public void canStart() {
         assertNotNull(camelContext);
         assertNotNull(camelContext.getRouteDefinitions());
+        assertTrue(camelContext.getRouteDefinitions().size() == 4);
     }
 }
