@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.garethahealy.ibmq-to-amq-bridge</groupId>
     <artifactId>ibmq-to-amq-bridge</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>IBM to AMQ Bridge</name>
 
     <properties>
