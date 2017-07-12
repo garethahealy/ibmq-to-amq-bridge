@@ -1,0 +1,39 @@
+sudo: required
+dist: trusty
+addons:
+  sonarqube:
+    organization: garethahealy-github
+    token:
+      secure: sDnoZcLZuZfrRKsK0gs7Z/cJxT38Fwsn7ujGiA54xnGZ8sgVDlm2U0Ea6xs1bLcZiJO1zHhcUUF/6jP0s9/9cxNOYU9BWlwAksDQy42dYE/0XqAay9/CtBZ9R/lyTtsM/ZoWaqCTGeKyzJsz+VEC7KNuL10ROaSV6gaaHjnJL92XNu+5IpOVkitmhBslmSNIwIa3kNzsJpy2BmtqlYc0JY+10YUsJmr4jpGvD7z6DNHDmyinRcg2nt56UcIDizJVdAGXWSXfJHMTCFUD0YV6ZVcMkabyvNFK9avyHjzPOES1iS466dGWsYb/UI+aQ+dJUqVkldowTY068KUq+bjocu24wUwXXOAAyNCKqLp1EEU0GfDP28ZgKOHFpI47Pclo9/FmfXHl5wNWiRE/ICy4zUgl26laxABWfIr8MvRedg8HuR49D/gCuld4u0YT55OPELysxmuk0RG0lrKeKYW70YD8FLlXnJTlTpvWBNRGyPq1SGEAy7zhs5woCFhOCfClcqGYzOCpdElq+sYnbuFecRh/E4e7kuQWb1idmvaenaiLyKA7r1YeUbnZtitY/2tA70ESy/ttt95/86nDBgMDgLkg1gZaFfIAdtxd1QikMiyPffxKyUgr1UlodwRmf2DzimreHHcj8l7nj53tlf/Br6mx3kNqJUoIlMVELbTQ/18=
+env:
+  global:
+  - secure: wU1P46mz9yf/M6m7hbVSnRIOQRr8vbpBVyTxFTeRV0uHt748RsAAp3pXkCM4BwSwwhFylFunz4olrtBfOj+ogSdSU6TTW4IOn5xafE01AcI3AhmjNOLT/5jJi51jjeAl211jKBVRBh2/lSspY1N/FQ+EQ/0yOkCxWmV91Ru1h/4xgizfHVcSwQ4ect2xXlVmziG99AjXDUgED4EotmBCnuOuVvbuGdWqPfJaz/i430/u9qrIhFN2hcravebFyWOa+u6zHhA6Sir8DMTKwoSxVLiBmT4beoKST+VZM6fx+oF+m1emn/8alofeaeG6N+THxmR36V6yJt2+fHWw7aRxc6DHwYQ3PgAWtAYyFEWZUlNQqGt8iu/n0oo1Rw2uWHj7a5S46oFffWvJpSn7+RrsM/qcjnR9BX3oA4NMLL1XiNHiXlXgNQXL+ADZYisiiZyX7PxOVvBqJxMqbpLQlo9D4CM02kwgu1fAORuZht2P0PHxa8OBdBQ6oHUJgropsM3gCcfHGX0osQFVTSOubMh79ssktLezgjFsepP0qvjCrtH5gGUPTf5LUt5SRiF8+IGLa/czU0Wpk/MVoWYh18G5+nP0nhZfXOwNu4gsZUYou13laa4FZJubR3rEM4gt2QnJYZe+L/f9a//HQbSAta7BnBosRE/Tic/vtKT9hxeVcy4=
+  - secure: r66p2WWOWQpZAPygOzMz9i+1nuwNjbtZjqbGmeqHZwB7i6/MExA6aY21+weRMSYAcj9MOIiIYfOMplfyeFUv/q4XabLAPHjBk/rszB/OIudXexOVPIsRR5HxFOuyk5Krj3+dLCzBSHHLvUTzrjUrl45G0ui0RSjjyaI4MZ2TM6OTmhGV9OExNvEKnOluf8SkobabDHPD+9BB328oKqz/E6CB64+MDRIlQidb7hJD6OUvAMoz7+jVTs0pZygK7bAH6xZFWVOxGDTU0trJMUvL7ZzRdqxzrE9df17eeN3eKGDV5uAyKFBjA/WpeZxRMI4dNqwWTgj/CyCOhcC6+hgtQdLOsUlKGc9l9muVWpC1MfXMM+mvYd1VUTZwwDuBHa2MRFmWs2nbAlAxfNCwq6G5bLywkSeqk6kAOHeU0d71vTc/iWi6VWVyijy3bZglUmWrDCN11xqDS24Ic6WapKTi8GtGhN97oZLSMJ/scGJTIaigGdXefOky9OTG1tbokgK6Mjh+WoqcWrro8/25p4EjsYTAdfcF9mw14lwGmMTtzJXJYdIKgRTR3JxXKQU2IVVM4FGY7wWIKyVk8R9TpZWllIjKncLERdMlxoqUJnbpHWtAyjtMD72MmI36rCWc14u5zxj9RJ8FsrvmKn4tseaH/qCZMH4dTAkvdXnpcZ9e6co=
+  - secure: CpDyM7blKs6DDAvvWh+RO1DAlM202vb4UI+6xRssn1WpYEX2+Xgjr6BYYYwczcPFPL2QEoK4yXRuLX80wG72v7Ac7Pga6ouU31kPCwdp+GbDAapBATptalhwGEgq8y7oZ6NV+f301B3Nu/SuFVQWktQnN+ixw/Xwpbr1JVKrn0b3lpgrtR7SadRCAvOB6gfi7MfzEfoiKPCR9aXkUsHSS0qjR06nEsPtxioqzHj2r/y+xuUM5x8EnUxtCZOnO4Waf3L0JiEnO7A7yMi2kkMqKoNMXQ+65hzGj9TvnJYmPM+gi+7qTp2a+hXzlyuYekOdNGCGlbAiD2ybVzmcDSleqZTJuIz4OtyvHn43xlQ9sJprTBMmkFx9ljjoSTC3Q3SkTZKz6B9GeeAxCbRdlH5GIzNKHmY2G+sZ6peX+z8FXWFvomC7gJwnAMFUgVNLgANoDrqFUMFYVjWxyPC3pDHRT6u6hWRXYPaCetW+rri30O96JcpWp/J+gadLa6FTe79Gixf8cvGikr0MP0/uZfFD81IhBF9i/ocjqPm5xTWxY5sXckx6LYD03bm2PGK5/rJBPFv87pgpfuqN64u9/U4Mh2frZLn8n7oGuUEbuxNfJaFeyR03UptXr40Z7nzngd4J0/HZPo4zRXywve+EXTz9+oVrJ+mO1MbVxjWfMlkVD6Y=
+  - secure: QPTrpuubMqiFBAFf7gtjVeJ4nzhxLbUGJQzyVz7O8EwXeGhqDG4yi3K8CtRuyfH0/8EXDZdAa0GUuSQ54/PQVJ/NChMP01lxBeDoFwaWsVHNHDxEumiZY5EQ5Eh/8z/V8VfbXVbIdFYYbvK8lL7sCACH21CUoDQbv+0VJbEoAVaOWwi722a9lCEQ94eTFWez3y7wQ4JSpzrtBlueHL2goV8qNsxyilYHXIkK6u4yk8/Om9Kc5P75trx0PVGzWY6S1NJNI6Tz5Qu20H4UMy1gZf8Fi1Gp3dUaSHExaDQ9uPPGi0SA7crl6RbPPMd0w5H2N1hhuqBVIY5WYFoeXTZW2Av0riWYCdJnZF8jifowfEoKi6opuxjufiBCOdjO+vQGgNHZAhAwz40zkC/O0mb5vjZWgRyXtAHW7e24++kUsm0bt95zgWUHk+eo8Jqa7VOEGNX+vvsKikGULYWOnC8B8IwviM1Nrvrtl7F3qJu2YgdnWkfntwgvY0a6kLtQCh1cSUzDVTtM0AZL/KsgTUSxwzo245dq2tSN7k+B0WwumB8VaT0LmKiZPfVdPP7sViq4iQq3mFnXJdnFhDsPyFr2Wy+d6uHstyNqHkmc9WCaLOVQvBHeG9/7Wq/M3C30ZUnetzYE9/cObGAyIcKuYhps+vqcqUeFZULtNbeh3g/vbMs=
+language: java
+jdk:
+- oraclejdk8
+before_install:
+- bash .travis/deploy-codesigning.sh
+install:
+- bash .travis/update.sh
+- export M2_HOME=/usr/share/maven3 && export PATH=${M2_HOME}/bin:${PATH} && export MAVEN_OPTS="-Xms2048m -Xmx2048m"
+- java -version && javac -version && mvn -version -B
+before_script:
+- mvn dependency:resolve-plugins dependency:resolve -B -Prelease-ossrh
+script:
+- mvn clean install -B
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -B
+deploy:
+  provider: script
+  script: bash .travis/deploy.sh
+  skip_cleanup: true
+  on:
+    tags: false
+    all_branches: true
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.victims
+  - $HOME/.sonar/cache
