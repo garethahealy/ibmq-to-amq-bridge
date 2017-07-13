@@ -7,15 +7,37 @@
 Simple example showing IBM MQ -> AMQ via a Apache Camel bridge
 
 ## Dependency's
-Instructions
+The IBM MQ Java dependencies have to be downloaded from the IBM website. The following link includes instructions on how to do this:
 - https://www-01.ibm.com/support/docview.wss?uid=swg21683398
 
-Download link
-- http://www-01.ibm.com/support/docview.wss?uid=swg21969244
+And the following is a direct link (at time of writing) to the download:
+- http://www-01.ibm.com/support/docview.wss?uid=swg21995100
 
-ibm-client-mvn-install.sh
-- https://gist.github.com/garethahealy/ba77479188dad1004e609050b5ecfa77
+Once you have downloaded the zip/tar and expanded, the JARs need to be installed via Maven.
+The below dependency is a core requirement:
+
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/com.ibm.mq.allclient.jar -DgroupId=com.ibm.mq -DartifactId=allclient -Dversion=8.0.0.6 -Dpackaging=jar
+
+These are optional and not directly used by the code, but it is suggested to install for safety:
+
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/providerutil.jar -DgroupId=com.ibm.mq -DartifactId=providerutil -Dversion=8.0.0.6 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/jms.jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/fscontext.jar -DgroupId=com.ibm.mq -DartifactId=fscontext -Dversion=8.0.0.6 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/com.ibm.mq.traceControl.jar -DgroupId=com.ibm.mq -DartifactId=traceControl -Dversion=8.0.0.6 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/JSON4J.jar -DgroupId=com.ibm.mq -DartifactId=JSON4J -Dversion=8.0.0.6 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=OSGi/com.ibm.mq.osgi.allclientprereqs_8.0.0.6.jar -DgroupId=com.ibm.mq.osgi -DartifactId=allclientprereqs -Dversion=8.0.0.6 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=OSGi/com.ibm.mq.osgi.allclient_8.0.0.6.jar -DgroupId=com.ibm.mq.osgi -DartifactId=allclient -Dversion=8.0.0.6 -Dpackaging=jar
 
 ## Deploy IBMMQ onto OCP
-deploy-ibm-mq.sh
-- https://gist.github.com/garethahealy/14216e7ea413e1a1c35d8d073acb1484
+1.Import image stream metadata
+
+    oc import-image ibmmq --from=docker.io/ibmcom/mq --all --confirm
+    
+2.Deploy IBM MQ8
+
+    oc new-app --image-stream=ibmmq:8 --env=LICENSE=accept --env=MQ_QMGR_NAME=QM1
+    
+3.Create service and route to allow external access
+
+    oc create -f https://raw.githubusercontent.com/garethahealy/ibmq-to-amq-bridge/master/ocp-resources/ibmmq-nodeport-service.yaml
+    oc create -f https://raw.githubusercontent.com/garethahealy/ibmq-to-amq-bridge/master/ocp-resources/ibmmq-webconsole-route.yaml
