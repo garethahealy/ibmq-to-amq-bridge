@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: mq
+spec:
+  port:
+    targetPort: 9443-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: passthrough
+  to:
+    kind: Service
+    name: mq
+    weight: 100
+  wildcardPolicy: None
