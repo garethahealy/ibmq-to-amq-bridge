@@ -3,7 +3,7 @@ dist: trusty
 services:
 - docker
 addons:
-  sonarqube:
+  sonarcloud:
     organization: garethahealy-github
     token:
       secure: sDnoZcLZuZfrRKsK0gs7Z/cJxT38Fwsn7ujGiA54xnGZ8sgVDlm2U0Ea6xs1bLcZiJO1zHhcUUF/6jP0s9/9cxNOYU9BWlwAksDQy42dYE/0XqAay9/CtBZ9R/lyTtsM/ZoWaqCTGeKyzJsz+VEC7KNuL10ROaSV6gaaHjnJL92XNu+5IpOVkitmhBslmSNIwIa3kNzsJpy2BmtqlYc0JY+10YUsJmr4jpGvD7z6DNHDmyinRcg2nt56UcIDizJVdAGXWSXfJHMTCFUD0YV6ZVcMkabyvNFK9avyHjzPOES1iS466dGWsYb/UI+aQ+dJUqVkldowTY068KUq+bjocu24wUwXXOAAyNCKqLp1EEU0GfDP28ZgKOHFpI47Pclo9/FmfXHl5wNWiRE/ICy4zUgl26laxABWfIr8MvRedg8HuR49D/gCuld4u0YT55OPELysxmuk0RG0lrKeKYW70YD8FLlXnJTlTpvWBNRGyPq1SGEAy7zhs5woCFhOCfClcqGYzOCpdElq+sYnbuFecRh/E4e7kuQWb1idmvaenaiLyKA7r1YeUbnZtitY/2tA70ESy/ttt95/86nDBgMDgLkg1gZaFfIAdtxd1QikMiyPffxKyUgr1UlodwRmf2DzimreHHcj8l7nj53tlf/Br6mx3kNqJUoIlMVELbTQ/18=
