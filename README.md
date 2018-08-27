@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)]()
 
 # ibmq-to-amq-bridge
-Simple example showing IBM MQ -> AMQ via a Apache Camel bridge
+Simple example showing IBM MQ9 -> AMQ via a Apache Camel bridge
 
 ## Dependency's
 The IBM MQ Java dependencies have to be downloaded from the IBM website. The following link includes instructions on how to do this:
@@ -20,13 +20,13 @@ The below dependency is a core requirement:
 
 These are optional and not directly used by the code, but it is suggested to install for safety:
 
-    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/providerutil.jar -DgroupId=com.ibm.mq -DartifactId=providerutil -Dversion=8.0.0.6 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/providerutil.jar -DgroupId=com.ibm.mq -DartifactId=providerutil -Dversion=9.0.0 -Dpackaging=jar
     mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/jms.jar
-    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/fscontext.jar -DgroupId=com.ibm.mq -DartifactId=fscontext -Dversion=8.0.0.6 -Dpackaging=jar
-    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/com.ibm.mq.traceControl.jar -DgroupId=com.ibm.mq -DartifactId=traceControl -Dversion=8.0.0.6 -Dpackaging=jar
-    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/JSON4J.jar -DgroupId=com.ibm.mq -DartifactId=JSON4J -Dversion=8.0.0.6 -Dpackaging=jar
-    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=OSGi/com.ibm.mq.osgi.allclientprereqs_8.0.0.6.jar -DgroupId=com.ibm.mq.osgi -DartifactId=allclientprereqs -Dversion=8.0.0.6 -Dpackaging=jar
-    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=OSGi/com.ibm.mq.osgi.allclient_8.0.0.6.jar -DgroupId=com.ibm.mq.osgi -DartifactId=allclient -Dversion=8.0.0.6 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/fscontext.jar -DgroupId=com.ibm.mq -DartifactId=fscontext -Dversion=9.0.0 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/com.ibm.mq.traceControl.jar -DgroupId=com.ibm.mq -DartifactId=traceControl -Dversion=9.0.0 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=JavaSE/JSON4J.jar -DgroupId=com.ibm.mq -DartifactId=JSON4J -Dversion=9.0.0 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=OSGi/com.ibm.mq.osgi.allclientprereqs_8.0.0.6.jar -DgroupId=com.ibm.mq.osgi -DartifactId=allclientprereqs -Dversion=9.0.0 -Dpackaging=jar
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=OSGi/com.ibm.mq.osgi.allclient_8.0.0.6.jar -DgroupId=com.ibm.mq.osgi -DartifactId=allclient -Dversion=9.0.0 -Dpackaging=jar
 
 ## Deploy IBMMQ onto OCP
 1.Import image stream metadata
@@ -35,7 +35,7 @@ These are optional and not directly used by the code, but it is suggested to ins
     
 2.Deploy IBM MQ8
 
-    oc new-app --image-stream=ibmmq:8 --env=LICENSE=accept --env=MQ_QMGR_NAME=QM1
+    oc new-app --image-stream=ibmmq:9 --env=LICENSE=accept --env=MQ_QMGR_NAME=QM1
     
 3.Create service and route to allow external access
 
